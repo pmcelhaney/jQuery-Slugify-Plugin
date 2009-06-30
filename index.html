@@ -9,17 +9,48 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>    
   <script type="text/javascript" charset="utf-8">
-    document.ready(function () {
-       
-    }); 
+    
+    
+    jQuery.fn.makeSlugFrom = function (field) {
+      var slugField = this;    
+      
+      var cleanURL = function(url) {
+        if (!url) return '';
+      	return url.replace(/'/g, '').replace(/\s*&\s*/g, ' and ').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+      }
+           
+      field.keyup( function () {
+    		if(slugField.hasClass('allowAutoEntry')) {
+    			slugField.attr('value', cleanURL($(this).attr('value')));		
+    		}
+    	});  
+      
+      
+    	slugField.change(function () { 
+        var me = $(this);       
+        me.removeClass('allowAutoEntry');
+        me.attr('value', cleanURL(me.attr('value')));
+        if(me.attr('value') == null || me.attr('value') == '') {
+          me.addClass('allowAutoEntry'); 
+        }  
+      });   
+      
+      slugField.change();
+
+    };
+    
+    $().ready(function () {
+      $('#slug').makeSlugFrom($('#title'));
+    });      
+                                  
   </script>
 </head>
-<body>                                               git in
+<body>                      
   
   
 <form>
-  <label for="title">Title</label><input type="text" name="title" value="" id="title">
-  <label for="slug">Slug</label><input type="slug" name="slug" value="" id="slug">
+  <label for="title">Title</label><input type="text" name="title" value="title" id="title">
+  <label for="slug" >Slug</label><input type="slug" name="slug" value="" id="slug">
   
   
 </form>
