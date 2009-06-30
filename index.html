@@ -37,17 +37,16 @@
         }   
 
         var updateSlug = function () {
-      		if(!$target.hasClass('slugify-locked')) {
-      			$target.val(convertToSlug($(this).val()));
-      			$target.text(convertToSlug($(this).val()));		
-      		}
+          var slug = convertToSlug($(this).val());
+      		$target.filter(':not(.slugify-locked)').val(slug).text(slug);		
       	}                   
-           
-        $source.keyup( updateSlug );  
-        $source.change( updateSlug ); 
+                
+
+        $source.keyup( updateSlug ).change( updateSlug ); 
       
       	$target.change(function () {       
-          $target.val(convertToSlug($target.val())); 
+          var slug = convertToSlug($(this).val());
+          $target.val(slug).text(slug);
           setLock();
         });   
             
