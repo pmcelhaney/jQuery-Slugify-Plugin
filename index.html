@@ -7,54 +7,7 @@
 	<title>Slugify JQuery Plugin</title>
 	<meta name="author" content="Patrick McElhaney">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
-  <script type="text/javascript" charset="utf-8">
-    jQuery(function($) {
-           
-      $.fn.slugify = function (source, options) {
-        var $target = $(this);            
-        var $source = $(source);            
-      
-      	var settings = $.extend({
-             slugFunc: (function (val, originalFunc) { return originalFunc(val); })
-          }, options);
-    	             
-
-        var convertToSlug = function(val) {
-          return settings.slugFunc(val, 
-            (function(v) {
-              if (!v) return '';
-            	return v.replace(/'/g, '').replace(/\s*&\s*/g, ' and ').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
-            })  
-          );
-        }
-    	
-        var setLock = function () {
-          if($target.val() != null && $target.val() != '') {
-            $target.addClass('slugify-locked');
-          } else {
-            $target.removeClass('slugify-locked');
-          }
-        }   
-
-        var updateSlug = function () {
-          var slug = convertToSlug($(this).val());
-      		$target.filter(':not(.slugify-locked)').val(slug).text(slug);		
-      	}                   
-                
-
-        $source.keyup( updateSlug ).change( updateSlug ); 
-      
-      	$target.change(function () {       
-          var slug = convertToSlug($(this).val());
-          $target.val(slug).text(slug);
-          setLock();
-        });   
-            
-        setLock();         
-
-      };   
-    });  
-  </script>  
+  <script src="jquery.slugify.js"></script>  
    
   <script type="text/javascript" charset="utf-8">   
     $().ready(function () {
