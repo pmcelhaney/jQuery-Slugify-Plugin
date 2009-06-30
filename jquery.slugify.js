@@ -1,7 +1,7 @@
-jQuery(function($) {
+(function ($) {
        
   $.fn.slugify = function (source, options) {
-    var $target = $(this);            
+    var $target = this;            
     var $source = $(source);            
   
   	var settings = $.extend({
@@ -28,7 +28,7 @@ jQuery(function($) {
 
     var updateSlug = function () {
       var slug = convertToSlug($(this).val());
-  		$target.filter(':not(.slugify-locked)').val(slug).text(slug);		
+  	  $target.filter(':not(.slugify-locked)').val(slug).text(slug);		
   	}                   
             
 
@@ -41,6 +41,8 @@ jQuery(function($) {
     });   
         
     setLock();         
-
-  };         
-});                    
+    
+    return this; 
+  };
+    
+})(jQuery);             
