@@ -11,36 +11,53 @@
   <script type="text/javascript" charset="utf-8">
     
     
-    jQuery.fn.makeSlugFrom = function (field) {
-      var slugField = this;    
+    jQuery.fn.slugify = function (source, options) {
+      var $target = $(this);            
+      var $source = $(source);            
       
-      var cleanURL = function(url) {
+    	var settings = jQuery.extend({
+           slugFunc: (function (val, originalFunc) { return originalFunc(val); })
+        }, options);
+    	             
+  	  var defaultSlugFunc = function(url) {
         if (!url) return '';
       	return url.replace(/'/g, '').replace(/\s*&\s*/g, ' and ').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
-      }
-           
-      field.keyup( function () {
-    		if(slugField.hasClass('allowAutoEntry')) {
-    			slugField.attr('value', cleanURL($(this).attr('value')));		
+      } 
+    	
+      var setLock = function () {
+        if($target.val() != null && $target.val() != '') {
+          $target.addClass('slugify-locked');
+        } else {
+          $target.removeClass('slugify-locked');
+        }
+      }   
+
+      var updateSlug = function () {
+    		if(!$target.hasClass('slugify-locked')) {
+    			$target.val(settings.slugFunc($(this).val(), defaultSlugFunc));		
     		}
-    	});  
+    	}     
       
+                                    
+      if($target.val() != null && $target.val() != '') {
+        $target.addClass('slugify-locked');
+      }     
+                               
+           
+      $source.keyup( updateSlug );  
+      $source.change( updateSlug ); 
       
-    	slugField.change(function () { 
-        var me = $(this);       
-        me.removeClass('allowAutoEntry');
-        me.attr('value', cleanURL(me.attr('value')));
-        if(me.attr('value') == null || me.attr('value') == '') {
-          me.addClass('allowAutoEntry'); 
-        }  
+    	$target.change(function () {       
+        $target.val(settings.slugFunc($target.val(), defaultSlugFunc)); 
+        setLock();
       });   
-      
-      slugField.change();
+            
+      setLock();         
 
     };
     
     $().ready(function () {
-      $('#slug').makeSlugFrom($('#title'));
+      $('#slug').slugify('#title');
     });      
                                   
   </script>
