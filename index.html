@@ -4,60 +4,65 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>untitled</title>
+	<title>Slugify JQuery Plugin</title>
 	<meta name="author" content="Patrick McElhaney">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>    
   <script type="text/javascript" charset="utf-8">
-    
-    
-    jQuery.fn.slugify = function (source, options) {
-      var $target = $(this);            
-      var $source = $(source);            
-      
-    	var settings = jQuery.extend({
-           slugFunc: (function (val, originalFunc) { return originalFunc(val); })
-        }, options);
-    	             
-  	  var defaultSlugFunc = function(url) {
-        if (!url) return '';
-      	return url.replace(/'/g, '').replace(/\s*&\s*/g, ' and ').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
-      } 
-    	
-      var setLock = function () {
-        if($target.val() != null && $target.val() != '') {
-          $target.addClass('slugify-locked');
-        } else {
-          $target.removeClass('slugify-locked');
-        }
-      }   
-
-      var updateSlug = function () {
-    		if(!$target.hasClass('slugify-locked')) {
-    			$target.val(settings.slugFunc($(this).val(), defaultSlugFunc));		
-    		}
-    	}     
-      
-                                    
-      if($target.val() != null && $target.val() != '') {
-        $target.addClass('slugify-locked');
-      }     
-                               
+    jQuery(function($) {
            
-      $source.keyup( updateSlug );  
-      $source.change( updateSlug ); 
+      $.fn.slugify = function (source, options) {
+        var $target = $(this);            
+        var $source = $(source);            
       
-    	$target.change(function () {       
-        $target.val(settings.slugFunc($target.val(), defaultSlugFunc)); 
-        setLock();
-      });   
-            
-      setLock();         
+      	var settings = $.extend({
+             slugFunc: (function (val, originalFunc) { return originalFunc(val); })
+          }, options);
+    	             
 
-    };
-    
+        var convertToSlug = function(val) {
+          return settings.slugFunc(val, 
+            (function(v) {
+              if (!v) return '';
+            	return v.replace(/'/g, '').replace(/\s*&\s*/g, ' and ').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+            })  
+          );
+        }
+    	
+        var setLock = function () {
+          if($target.val() != null && $target.val() != '') {
+            $target.addClass('slugify-locked');
+          } else {
+            $target.removeClass('slugify-locked');
+          }
+        }   
+
+        var updateSlug = function () {
+      		if(!$target.hasClass('slugify-locked')) {
+      			$target.val(convertToSlug($(this).val()));		
+      		}
+      	}                   
+           
+        $source.keyup( updateSlug );  
+        $source.change( updateSlug ); 
+      
+      	$target.change(function () {       
+          $target.val(convertToSlug($target.val())); 
+          setLock();
+        });   
+            
+        setLock();         
+
+      };   
+    });  
+  </script>  
+   
+  <script type="text/javascript" charset="utf-8">   
     $().ready(function () {
-      $('#slug').slugify('#title');
+      $('.slug').slugify('#title', {
+          slugFunc: (function(val, originalFunc) { return (originalFunc(val).toUpperCase()); } )
+        }
+      );
     });      
                                   
   </script>
@@ -66,10 +71,15 @@
   
   
 <form>
-  <label for="title">Title</label><input type="text" name="title" value="title" id="title">
-  <label for="slug" >Slug</label><input type="slug" name="slug" value="" id="slug">
+  <div>
+    <label for="title">Title</label>
+    <input type="text" name="title" value="title" id="title">     
+  </div>              
   
-  
+  <div>
+    <label for="slug" >Slug</label>
+    <input type="text" name="slug" value="" id="slug" class="slug">  
+  </div>
 </form>
          
 
