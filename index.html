@@ -4,89 +4,84 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Slugify JQuery Plugin</title>
+	<title>Slugify jQuery Plugin</title>
 	<meta name="author" content="Patrick McElhaney">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
-  <script src="jquery.slugify.js"></script>  
-   
-  <script type="text/javascript" charset="utf-8">   
-    $().ready(function () {
-      $('#slug').slugify('#title');
-
-      $('#slug2').slugify('#title2', {
-          slugFunc: (function(val, originalFunc) { return (originalFunc(val).toUpperCase()); } )
-        }
-      );          
-      
-      $('#example_3 .slug').slugify('#title3');
-    });
-                             
-  </script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="jquery.slugify.js"></script>	
+	
+	<script type="text/javascript" charset="utf-8">
+		$().ready(function () {
+			$('#slug').slugify('#title');
+			
+			$('#slug2').slugify('#title2', {
+					slugFunc: (function(val, originalFunc) { return (originalFunc(val).toUpperCase()); } )
+				}
+			);
+			
+			$('#example_3 .slug').slugify('#title3');
+		});
+		
+	</script>
 </head>
-<body>                      
-  
-  
-<form>          
-  <fieldset id="example_1">
-    <legend>Example 1</legend>
-  
-    <p>Type the title and watch the slug update automatically.</p>
-   
-    <div>
-      <label for="title">Title</label>
-      <input type="text" name="title" value="" id="title" size="40">     
-    </div>              
-  
-    <div>
-      <label for="slug" >Slug</label>
-      <input type="text" name="slug" value="" id="slug" size="40">  
-    </div>   
-           
-  </fieldset>     
-  
-  <fieldset id="example_2">
-    <legend>Example 2</legend>
-  
-    <p>This one uses a custom <code>slugFunc</code> function that makes the slug uppercase.</p>
-   
-    <div>
-      <label for="title2">Title</label>
-      <input type="text" name="title2" value="" id="title2" size="40">     
-    </div>              
-  
-    <div>
-      <label for="slug2" >Slug</label>
-      <input type="text" name="slug2" value="" id="slug2" size="40">  
-    </div>   
-           
-  </fieldset>
-  
-             
-   <fieldset id="example_3">
-    <legend>Example 3</legend>
-  
-    <p>It can also update the text() of an HTML element.</p>
-   
-    <div>
-      <label for="title3">Title</label>
-      <input type="text" name="title3" value="" id="title3" size="40">     
-    </div>              
-  
-    <div>
-      <label for="slug3">Slug</label>
-      <input type="text" name="slug3" value="" id="slug3" size="40" class="slug">  
-    </div>   
-            
-            
-    <p>The slug is <code class="slug"></code>.</p>                                                
-           
-  </fieldset>
- 
- 
-</form>
-         
+<body>
+	
+	
+<form>
+	<fieldset id="example_1">
+		<legend>Example 1</legend>
+	
+		<p>Type the title and watch the slug update automatically.</p>
+	 
+		<div>
+			<label for="title">Title</label>
+			<input type="text" name="title" value="" id="title" size="40">
+		</div>
+	
+		<div>
+			<label for="slug" >Slug</label>
+			<input type="text" name="slug" value="" id="slug" size="40">
+		</div>
+		
+	</fieldset>
+	
+	<fieldset id="example_2">
+		<legend>Example 2</legend>
+	
+		<p>This one uses a custom <code>slugFunc</code> function that makes the slug uppercase.</p>
+	 
+		<div>
+			<label for="title2">Title</label>
+			<input type="text" name="title2" value="" id="title2" size="40">
+		</div>
+	
+		<div>
+			<label for="slug2" >Slug</label>
+			<input type="text" name="slug2" value="" id="slug2" size="40">
+		</div>
+		
+	</fieldset>
+	
+	 <fieldset id="example_3">
+		<legend>Example 3</legend>
+	
+		<p>It can also update the text() of an HTML element.</p>
+	 
+		<div>
+			<label for="title3">Title</label>
+			<input type="text" name="title3" value="" id="title3" size="40">
+		</div>
+		
+		<div>
+			<label for="slug3">Slug</label>
+			<input type="text" name="slug3" value="" id="slug3" size="40" class="slug">	
+		</div>
+		
+		
+		<p>The slug is <code class="slug"></code>.</p>
+		
+	</fieldset>
 
+</form>
 
 </body>
-</html>
-                                     
+</html>  
