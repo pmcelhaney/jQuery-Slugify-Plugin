@@ -13,8 +13,8 @@
 			return settings.slugFunc(val, 
 				(function(v) {
 					if (!v) return '';
-                                        var from = "ıİöÖüÜçÇğĞşŞâÂêÊîÎôÔûÛ";
-					var to   = "iIoOuUcCgGsSaAeEiIoOuU";
+          var from = "ıİöÖüÜçÇğĞşŞâÂêÊîÎôÔûÛĘęÓóĄąŚśŁłŻżŹźĆćŃń";
+					var to   = "iIoOuUcCgGsSaAeEiIoOuUEeOoAaSsLlZzZzCcNn";
 					
 					for (var i=0, l=from.length ; i<l ; i++) {
 					    v = v.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
