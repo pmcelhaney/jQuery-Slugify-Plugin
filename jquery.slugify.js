@@ -17,7 +17,7 @@
 					var to   = "iIoOuUcCgGsSaAeEiIoOuUEeOoAaSsLlZzZzCcNn";
 					
 					for (var i=0, l=from.length ; i<l ; i++) {
-					    v = v.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+					    v = v.replace(from.charAt(i), to.charAt(i));
 					}
 
 					return v.replace(/'/g, '').replace(/\s*&\s*/g, ' and ').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
