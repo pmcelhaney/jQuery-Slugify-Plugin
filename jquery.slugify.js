@@ -13,7 +13,7 @@
 			return settings.slugFunc(val, 
 				(function(v) {
 					if (!v) return '';
-          var from = "ıİöÖüÜçÇğĞşŞâÂêÊîÎôÔûÛĘęÓóĄąŚśŁłŻżŹźĆćŃń";
+					var from = "ıİöÖüÜçÇğĞşŞâÂêÊîÎôÔûÛĘęÓóĄąŚśŁłŻżŹźĆćŃń";
 					var to   = "iIoOuUcCgGsSaAeEiIoOuUEeOoAaSsLlZzZzCcNn";
 					
 					for (var i=0, l=from.length ; i<l ; i++) {
