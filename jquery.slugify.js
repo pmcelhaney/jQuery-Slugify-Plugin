@@ -3,7 +3,8 @@
 	$.fn.slugify = function (source, options) {
 		var $target = this;
 		var $source = $(source);
-
+		var targetIsInput = $target.is('input') || $target.is('textarea');
+		
 		var settings = $.extend({
 			slugFunc: (function (val, originalFunc) { return originalFunc(val); })
 		}, options);
@@ -32,7 +33,11 @@
 
 		var updateSlug = function () {
 			var slug = convertToSlug($(this).val());
-			$target.filter(':not(.slugify-locked)').val(slug).text(slug);
+			if (targetIsInput) {
+				$target.filter(':not(.slugify-locked)').val(slug);
+			} else {
+				$target.filter(':not(.slugify-locked)').text(slug);
+			}
 		};
 
 
