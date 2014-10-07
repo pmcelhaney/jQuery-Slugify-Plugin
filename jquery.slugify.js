@@ -18,7 +18,7 @@
                     for(var i = 0; i<v.length; i++){
                         str += map[ v.charCodeAt(i).toString(16) ] || "";
                     }
-                    return str.toLowerCase().replace(/-+/g, '-').replace(/^-|-$/, '');
+                    return str.toLowerCase().replace(/-+/g, '-').replace(/^-|-$/g, '');
 				})
 			);
 		};
